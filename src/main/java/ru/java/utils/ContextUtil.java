@@ -12,15 +12,7 @@ public class ContextUtil {
     public static String getBackHtml(Context context) {
         String backHtml;
         if (context.back() != null) {
-
-            String backRef;
-
-            if (context.main()) {
-                backRef = "../../" + context.back();
-            } else {
-                backRef = "../../../" + context.back();
-            }
-            StringSubstitutor substitutor = new StringSubstitutor(Map.of("back", backRef));
+            StringSubstitutor substitutor = new StringSubstitutor(Map.of("back", "../../index.html"));
             backHtml = substitutor.replace(ThemeContext.back);
         } else {
             backHtml = "";
@@ -31,7 +23,7 @@ public class ContextUtil {
     public static String createDir(Context context, Map.Entry<String, Thema> thema) {
         String file = ThemeContext.main_item_dir;
 
-        String ref = context.main()? context.path() + "/" + thema.getKey() + "/html/index.html": "../" + thema.getKey() + "/html/index.html";
+        String ref = context.main() ? context.path() + "/" + thema.getKey() + "/html/index.html" : "../" + thema.getKey() + "/html/index.html";
 
         StringSubstitutor substitutor = new StringSubstitutor(Map.of("ref", ref, "name", thema.getKey(), "count", thema.getValue().countQuestions().toString()));
 
